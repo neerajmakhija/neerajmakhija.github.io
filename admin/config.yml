@@ -1,0 +1,45 @@
+backend:
+  name: github
+  repo: neerajmakhija/neerajmakhija.github.io
+  branch: main
+
+media_folder: "assets/img"
+public_folder: "/assets/img"
+
+collections:
+  - name: "tabs"
+    label: "Pages (About / Resume / Projects)"
+    files:
+      - file: "_tabs/about.md"
+        label: "About"
+        name: "about"
+        fields:
+          - {label: "Icon", name: "icon", widget: "string", default: "fas fa-info-circle"}
+          - {label: "Order", name: "order", widget: "number", default: 4}
+          - {label: "Content", name: "body", widget: "markdown"}
+      - file: "_tabs/resume.md"
+        label: "Resume"
+        name: "resume"
+        fields:
+          - {label: "Icon", name: "icon", widget: "string", default: "fas fa-file-alt"}
+          - {label: "Order", name: "order", widget: "number", default: 2}
+          - {label: "Content", name: "body", widget: "markdown"}
+      - file: "_tabs/projects.md"
+        label: "Projects"
+        name: "projects"
+        fields:
+          - {label: "Icon", name: "icon", widget: "string", default: "fas fa-microchip"}
+          - {label: "Order", name: "order", widget: "number", default: 3}
+          - {label: "Content", name: "body", widget: "markdown"}
+
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Categories", name: "categories", widget: "list", default: ["General"]}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Body", name: "body", widget: "markdown"}
