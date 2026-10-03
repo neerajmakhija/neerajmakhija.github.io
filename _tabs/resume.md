@@ -5,27 +5,36 @@ order: 2
 
 **Noida, India** · [neerajmakhija79@gmail.com](mailto:neerajmakhija79@gmail.com) · +91-9811573148 · [LinkedIn](https://www.linkedin.com/in/neeraj-makhija-bb1760129)
 
+[Download PDF resume](/assets/files/Neeraj_Makhija_Resume.pdf){: .btn .btn-outline-primary }
+
 ## Summary
 
-Senior embedded firmware engineer with 7+ years developing peripheral device drivers (UART, SPI, I2C, RS232/RS485) and production firmware for bare-metal and RTOS (FreeRTOS, embOS) environments on ARM Cortex-M platforms (STM32, TI CC1314R). Delivers tested, well-documented Embedded C/C++ with strong low-level debugging (GDB, git bisect, logic/protocol analysis) and Python/Shell build-and-test automation. Deep hands-on work in secure boot, secure OTA firmware updates, and networking/RF stacks (TCP/IP, IPv6, DHCPv6, CoAP, Wi-SUN RF mesh). Experienced in Git-based code review, JIRA-driven issue triage, and cross-functional delivery with distributed engineering teams; additional background in embedded Linux, POSIX, and kernel-driver development.
+Senior embedded firmware engineer with 7+ years building production firmware for bare-metal and RTOS (FreeRTOS, embOS) environments on ARM Cortex-M (STM32, TI CC1314R). Owns cellular IoT firmware for a battery-powered smart gas-meter endpoint: LTE-M/NB-IoT modem subsystem architecture, AT-command and modem state-machine design, PSM duty-cycle and battery-life optimization, and secure CoAP OTA firmware download, validated with current-profiler and AT/UART traces. Strong in peripheral drivers (UART, SPI, I2C, RS232/RS485), networking/RF stacks (IPv6, DHCPv6, CoAP, Wi-SUN RF mesh), and low-level debugging (GDB, git bisect, logic analysis). Now extending into Linux device drivers, Cortex-A (AArch64), Zephyr, ESP32 BLE/Wi-Fi and RISC-V.
 
 ## Experience
 
 ### Senior Firmware Engineer — Landis+Gyr, Noida
-*May 2023 – Present*
+*May 2023 – Present · Cellular IoT (LTE-M/NB-IoT) battery endpoint for smart gas metering · Wi-SUN RF mesh for AMI smart metering*
 
-- Implemented a CoAP Block2 OTA firmware download client on TI CC1314R (embOS) over UDP cellular transport, with RFC 7252-compliant retransmission and flash offset management for robust over-the-air field upgrades
-- Designed a secure firmware-download subsystem with multi-block transfer, integrity verification, and fail-safe flash write sequencing, eliminating brick risk during interrupted updates
-- Engineered and optimized Wi-SUN RF mesh networking firmware for large-scale AMI smart-metering deployments, improving end-to-end communication reliability in production
-- Integrated and debugged DHCPv6, IPv6, and InterNiche TCP/IP stack flows, including custom DHCPv6 client-ID generation and solicit/advertise/request handling; contributed EAP-PSK (CEAP) authentication call flows for secure Wi-SUN node admission
+- Redesigned the cellular communication task so the modem finishes all pending work in a single wake-up, cutting radio-on time per session by up to 85% and significantly extending battery life
+- Built a battery-life model from real current measurements, confirming the device comfortably exceeds its 20-year battery requirement and letting the team see the impact of any configuration change
+- Diagnosed and fixed LTE-M/NB-IoT modem power issues using current profiling and AT command traces, including a sleep-entry bug that kept the modem drawing far more than its deep-sleep current
+- Implemented a CoAP Block2 OTA firmware download client on TI CC1314R (embOS) over UDP cellular transport with RFC 7252-compliant retransmission, Uri-Path/Uri-Query handling and flash offset management; designed fail-safe session teardown and recovery so interrupted or aborted updates never brick the device or resume stale sessions
+- Engineered and optimized Wi-SUN RF mesh firmware for large-scale AMI deployments; integrated DHCPv6, IPv6 and InterNiche TCP/IP flows (custom client-ID, solicit/advertise/request) and EAP-PSK node admission
 - Root-caused a firmware crash via git bisect to a GPIO configuration regression and resolved critical field defects, hardening production stability
-- **Recognized with Team of the Year 2024**
 
 ### Team Lead, Software Engineer (C/C++) — Chetu Inc., Noida
 *Nov 2021 – Apr 2023*
 
 - Led a five-engineer firmware team delivering NFC, MSR, and touchscreen POS terminal firmware; owned client-facing requirements and shipped client projects on schedule
 - Built drone flight-automation features using DJI OSDK on embedded Linux, including GPS waypoint navigation, altitude control, and multi-sensor fusion
+
+## Projects
+
+Details on the [Projects](/projects/) tab.
+
+- **Smart Home Voice Assistant & IoT Nodes** *(in progress)* — Zephyr RTOS on STM32F407 Discovery with a Nextion touch HMI; ESP32-WROOM-32 nodes on ESP-IDF (FreeRTOS) with BLE and Wi-Fi for lighting and AC control
+- **Linux Device Drivers, ARM Cortex-A & RISC-V** *(ongoing)* — kernel modules and device drivers; ARMv8-A / AArch64 and the RISC-V ISA
 
 ## Early Experience
 
@@ -46,12 +55,12 @@ B.S. Anangpuria Institute of Technology & Management · 2015 – 2019
 
 ## Technical Skills
 
-**Interfaces & Drivers:** UART, SPI, I2C, RS232, RS485, GPIO, DMA, Interrupts, Memory-Mapped I/O
-**RTOS / Bare-Metal / MCU:** FreeRTOS, embOS, NuttX, ARM Cortex-M3/M4/M33, 8-bit MCUs
-**Networking & Protocols:** TCP/IP, UDP, IPv6, DHCPv6, CoAP (RFC 7252), Wi-SUN RF Mesh, EAP-PSK, InterNiche
-**Wireless & IoT:** NB-IoT, LTE-M Cellular, AT Commands, RF Mesh Networking, Battery-Powered Optimization
-**Languages & Build Tools:** Embedded C, C++, Python, Bash, GCC, GNU Make, GNU ARM Toolchain, IAR
+**Wireless & IoT:** LTE-M, NB-IoT, Wi-SUN RF Mesh, BLE, Wi-Fi, Cellular AT Commands, Power Saving Mode (PSM), Battery-Life Optimization
+**Architectures & MCUs:** ARM Cortex-M3/M4/M33, ARM Cortex-A (ARMv8-A / AArch64), RISC-V (learning), STM32, TI CC1314R, ESP32 (ESP-IDF), 8-bit MCUs
+**RTOS / Bare-Metal:** FreeRTOS, embOS, Zephyr RTOS, NuttX, Bare-Metal
+**Interfaces & Drivers:** UART, SPI, I2C, USB, RS232, RS485, GPIO, DMA, Interrupts, Memory-Mapped I/O
+**Embedded Linux:** Linux Device Drivers (kernel modules, in progress), Embedded Linux (Debian/Ubuntu), POSIX Threads, Linux Shell
+**Networking & Protocols:** TCP/IP, UDP, IPv6, DHCPv6, CoAP (RFC 7252), EAP-PSK, InterNiche
 **Firmware Security:** Secure Boot, Secure OTA, Bootloader Development, Embedded Cryptography (AES)
-**Debug & Test Tools:** GDB, JTAG/SWD, git bisect, Logic/Protocol Analysis
-**Embedded Linux / BSP:** Embedded Linux (Debian/Ubuntu), POSIX Threads, Linux Shell, Kernel Drivers
-**Workflow:** Git, JIRA, Code Review, Cross-Functional Delivery
+**Languages & Build:** Embedded C, C++, Python, Bash, GCC, GNU Make, GNU ARM Toolchain, IAR
+**Debug, Test & Workflow:** GDB, JTAG/SWD, Power Profiling (PPK2), git bisect, Logic / Protocol Analysis, Git, JIRA / TFS, Code Review

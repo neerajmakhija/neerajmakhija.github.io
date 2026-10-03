@@ -14,12 +14,12 @@ timezone: Asia/Kolkata
 
 title: Neeraj Makhija
 
-tagline: Senior Embedded Firmware Engineer — Peripheral Drivers, RTOS & Secure OTA
+tagline: Senior Embedded Firmware Engineer — Cellular IoT, Low-Power RTOS & Secure OTA
 
 description: >-
-  Senior embedded firmware engineer with 7+ years building peripheral device drivers,
-  bare-metal/RTOS firmware, secure boot & OTA systems, and Wi-SUN RF mesh networking
-  on ARM Cortex-M platforms. Open to senior and international embedded roles.
+  Senior embedded firmware engineer with 7+ years building cellular IoT (LTE-M/NB-IoT),
+  low-power bare-metal/RTOS firmware, secure boot & OTA systems, and Wi-SUN RF mesh
+  networking on ARM Cortex-M platforms. Open to senior and international embedded roles.
 
 url: "https://neerajmakhija.github.io"
 
