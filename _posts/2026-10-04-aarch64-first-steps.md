@@ -3,6 +3,9 @@ title: "AArch64 First Steps: Exception Levels, Registers and Booting Multiple Co
 date: 2026-10-04 10:00:00 +0530
 categories: [ARM, AArch64]
 tags: [armv8, aarch64, cortex-a, exception-levels, trustzone, multicore, boot]
+image:
+  path: /assets/img/posts/aarch64-first-steps/cover.png
+  alt: AArch64 exception levels EL0 to EL3
 ---
 
 I've spent most of my career on Cortex-M parts (STM32, TI CC13xx) running embOS and FreeRTOS. Moving to Cortex-A and 64-bit Armv8-A is a real shift: there are privilege levels, two security worlds, a hypervisor layer and several cores that all wake up at once. These are my cleaned-up notes from the first week, written for anyone making the same jump from microcontrollers.
@@ -16,6 +19,9 @@ One detail worth knowing early: Cortex-A cores have **separate L1 instruction an
 ## 2. Exception levels (EL0–EL3)
 
 AArch64 has four **Exception Levels**. (I kept writing "execution levels" in my notes; the correct term is *exception* levels.) A higher number means more privilege.
+
+![AArch64 exception levels in the Normal and Secure worlds](/assets/img/posts/aarch64-first-steps/exception-levels.png){: w="540" h="675" }
+
 
 | EL  | Typically runs | Example |
 |-----|----------------|---------|
@@ -70,6 +76,9 @@ Say a user program at EL0 makes a system call:
 4. It jumps to `VBAR_EL1` + an offset in the vector table (16 entries, 0x80 bytes apart, table aligned to 2 KB).
 5. The handler does its work and executes `ERET`, which copies `ELR_EL1` back to `PC` and `SPSR_EL1` back to `PSTATE`, returning to EL0.
 
+![Exception entry on Cortex-M vs AArch64](/assets/img/posts/aarch64-first-steps/exception-entry.png){: w="540" h="675" }
+
+
 Coming from Cortex-M, the big difference is that **the hardware doesn't push registers to the stack for you**. On M-profile, exception entry automatically stacks R0–R3, R12, LR, PC and xPSR. On A-profile, saving general-purpose registers is the handler's responsibility.
 
 ## 5. Endianness
@@ -87,6 +96,9 @@ On a multicore SoC, after reset **every core starts at the same reset address**,
 - On many real SoCs, secondary cores are held in reset or powered down until the primary core wakes them — via **PSCI `CPU_ON`** (the usual Linux method through Trusted Firmware) or a **spin-table**.
 
 To run cores concurrently, each core needs **its own stack** (and its own per-core data). Boot code typically reads `MPIDR_EL1`, lets core 0 do global initialization, and parks the others in a low-power `WFE` loop until they're released.
+
+![Multicore boot flow on AArch64](/assets/img/posts/aarch64-first-steps/multicore-boot.png){: w="540" h="675" }
+
 
 ```asm
 _start:
@@ -118,6 +130,9 @@ Giving each core a separate stack is just an offset from a shared top:
 ### `MPIDR_EL1` is not just "core 0, 1, 2, 3"
 
 `MPIDR_EL1` gives an **affinity hierarchy**, not a flat index:
+
+![MPIDR_EL1 affinity fields on Cortex-A53 vs Cortex-A55](/assets/img/posts/aarch64-first-steps/mpidr.png){: w="540" h="675" }
+
 
 - **Aff0**: core within a cluster (on Cortex-A53/A57/A72)
 - **Aff1**: cluster number
